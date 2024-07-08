@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <ul class="tabs">
+                <li class="tab" onclick="window.location.href='/'">Home-Page</li>
+                <li class="tab active" data-tab="all-users">All Users</li>
+                <li class="tab" data-tab="all-members">All Members</li>
+                <li class="tab" data-tab="applicants">Applicants</li>
+                <li class="tab" data-tab="civilians">Civilians</li>
+                <li class="tab" data-tab="dress-uniform-creation">Dress Uniform Creation</li>
+            </ul>
+        </div>
+        <div class="content">
+            <h1>Admin Dashboard</h1>
+            <form action="/update-all-users" method="POST">
+                <div id="all-users" class="tab-content active">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Is Admin</th>
+                                <th>Rank</th>
+                                <th>Role</th>
+                                <th>MOS</th>
+                                <th>Callsign</th>
+                                <th>Active</th>
+                                <th>Team</th>
+                                <th>Time in Unit (Days)</th>
+                                <th>Time in Rank (Days)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach((user, index) => { %>
+                                <tr>
+                            <td><input type="text" name="users[<%= index %>][username]" value="<%= user.username %>"></td>
+                            <td><%= user.email %></td>
+                            <td>
+                                <input type="checkbox" name="users[<%= index %>][isAdmin]" value="true" <%= user.isAdmin ? 'checked' : '' %>>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][rank]">
+                                    <option value="Civilian" <%= user.rank === 'Civilian' ? 'selected' : '' %>>Civilian</option>
+                                    <option value="CAN" <%= user.rank === 'CAN' ? 'selected' : '' %>>CAN</option>
+                                    <option value="SGT" <%= user.rank === 'SGT' ? 'selected' : '' %>>SGT</option>
+                                    <option value="SSG" <%= user.rank === 'SSG' ? 'selected' : '' %>>SSG</option>
+                                    <option value="SFC" <%= user.rank === 'SFC' ? 'selected' : '' %>>SFC</option>
+                                    <option value="MSG" <%= user.rank === 'MSG' ? 'selected' : '' %>>MSG</option>
+                                    <option value="SGM" <%= user.rank === 'SGM' ? 'selected' : '' %>>SGM</option>
+                                    <option value="WOC" <%= user.rank === 'WOC' ? 'selected' : '' %>>WOC</option>
+                                    <option value="WO1" <%= user.rank === 'WO1' ? 'selected' : '' %>>WO1</option>
+                                    <option value="CW2" <%= user.rank === 'CW2' ? 'selected' : '' %>>CW2</option>
+                                    <option value="CW3" <%= user.rank === 'CW3' ? 'selected' : '' %>>CW3</option>
+                                    <option value="CW4" <%= user.rank === 'CW4' ? 'selected' : '' %>>CW4</option>
+                                    <option value="CW5" <%= user.rank === 'CW5' ? 'selected' : '' %>>CW5</option>
+                                    <option value="2LT" <%= user.rank === '2LT' ? 'selected' : '' %>>2LT</option>
+                                    <option value="1LT" <%= user.rank === '1LT' ? 'selected' : '' %>>1LT</option>
+                                    <option value="CPT" <%= user.rank === 'CPT' ? 'selected' : '' %>>CPT</option>
+                                    <option value="MAJ" <%= user.rank === 'MAJ' ? 'selected' : '' %>>MAJ</option>
+                                    <option value="LTC" <%= user.rank === 'LTC' ? 'selected' : '' %>>LTC</option>
+                                    <option value="COL" <%= user.rank === 'COL' ? 'selected' : '' %>>COL</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][role]">
+                                    <option value="N/A" <%= user.role === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="Troop CO" <%= user.role === 'Troop CO' ? 'selected' : '' %>>Troop CO</option>
+                                    <option value="Troop SGM" <%= user.role === 'Troop SGM' ? 'selected' : '' %>>Troop SGM</option>
+                                    <option value="Comms SGT" <%= user.role === 'Comms SGT' ? 'selected' : '' %>>Comms SGT</option>
+                                    <option value="Medical SGT" <%= user.role === 'Medical SGT' ? 'selected' : '' %>>Medical SGT</option>
+                                    <option value="1IC" <%= user.role === '1IC' ? 'selected' : '' %>>1IC</option>
+                                    <option value="2IC" <%= user.role === '2IC' ? 'selected' : '' %>>2IC</option>
+                                    <option value="Medic" <%= user.role === 'Medic' ? 'selected' : '' %>>Medic</option>
+                                    <option value="EOD" <%= user.role === 'EOD' ? 'selected' : '' %>>EOD</option>
+                                    <option value="Pointman" <%= user.role === 'Pointman' ? 'selected' : '' %>>Pointman</option>
+                                    <option value="S.W.T" <%= user.role === 'S.W.T' ? 'selected' : '' %>>S.W.T</option>
+                                    <option value="Assaulter" <%= user.role === 'Assaulter' ? 'selected' : '' %>>Assaulter</option>
+                                    <option value="Sniper" <%= user.role === 'Sniper' ? 'selected' : '' %>>Sniper</option>
+                                    <option value="Spotter" <%= user.role === 'Spotter' ? 'selected' : '' %>>Spotter</option>
+                                    <option value="Intel Officer" <%= user.role === 'Intel Officer' ? 'selected' : '' %>>Intel Officer</option>
+                                    <option value="Intel Analyst" <%= user.role === 'Intel Analyst' ? 'selected' : '' %>>Intel Analyst</option>
+                                    <option value="Squadron CO" <%= user.role === 'Squadron CO' ? 'selected' : '' %>>Squadron CO</option>
+                                    <option value="Squadron XO" <%= user.role === 'Squadron XO' ? 'selected' : '' %>>Squadron XO</option>
+                                    <option value="Lead Pilot" <%= user.role === 'Lead Pilot' ? 'selected' : '' %>>Lead Pilot</option>
+                                    <option value="Pilot" <%= user.role === 'Pilot' ? 'selected' : '' %>>Pilot</option>
+                                    <option value="Candidate" <%= user.role === 'Candidate' ? 'selected' : '' %>>Candidate</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][mos]">
+                                    <option value="N/A" <%= user.mos === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="18X" <%= user.mos === '18X' ? 'selected' : '' %>>18X</option>
+                                    <option value="18B" <%= user.mos === '18B' ? 'selected' : '' %>>18B</option>
+                                    <option value="18A" <%= user.mos === '18A' ? 'selected' : '' %>>18A</option>
+                                    <option value="18Z" <%= user.mos === '18Z' ? 'selected' : '' %>>18Z</option>
+                                    <option value="18F" <%= user.mos === '18F' ? 'selected' : '' %>>18F</option>
+                                    <option value="18E" <%= user.mos === '18E' ? 'selected' : '' %>>18E</option>
+                                    <option value="18D" <%= user.mos === '18D' ? 'selected' : '' %>>18D</option>
+                                    <option value="18C" <%= user.mos === '18C' ? 'selected' : '' %>>18C</option>
+                                    <option value="153E" <%= user.mos === '153E' ? 'selected' : '' %>>153E</option>
+                                    <option value="152C" <%= user.mos === '152C' ? 'selected' : '' %>>152C</option>
+                                    <option value="154E" <%= user.mos === '154E' ? 'selected' : '' %>>154E</option>
+                                    <option value="11F3B" <%= user.mos === '11F3B' ? 'selected' : '' %>>11F3B</option>
+                                    <option value="11SXQ" <%= user.mos === '11SXQ' ? 'selected' : '' %>>11SXQ</option>
+                                    <option value="1A1X3A" <%= user.mos === '1A1X3A' ? 'selected' : '' %>>1A1X3A</option>
+                                    <option value="1U1X1R" <%= user.mos === '1U1X1R' ? 'selected' : '' %>>1U1X1R</option>
+                                </select>
+                            </td>        
+                            <td>
+                                <select name="users[<%= index %>][callsign]">
+                                    <option value="N/A" <%= user.callsign === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="D1A" <%= user.callsign === 'D1A' ? 'selected' : '' %>>D1A</option>
+                                    <option value="D1B" <%= user.callsign === 'D1B' ? 'selected' : '' %>>D1B</option>
+                                    <option value="D1C" <%= user.callsign === 'D1C' ? 'selected' : '' %>>D1C</option>
+                                    <option value="D1D" <%= user.callsign === 'D1D' ? 'selected' : '' %>>D1D</option>
+                                    <option value="DA1" <%= user.callsign === 'DA1' ? 'selected' : '' %>>DA1</option>
+                                    <option value="DA2" <%= user.callsign === 'DA2' ? 'selected' : '' %>>DA2</option>
+                                    <option value="DA3" <%= user.callsign === 'DA3' ? 'selected' : '' %>>DA3</option>
+                                    <option value="DA4" <%= user.callsign === 'DA4' ? 'selected' : '' %>>DA4</option>
+                                    <option value="DA5" <%= user.callsign === 'DA5' ? 'selected' : '' %>>DA5</option>
+                                    <option value="DA6" <%= user.callsign === 'DA6' ? 'selected' : '' %>>DA6</option>
+                                    <option value="DB1" <%= user.callsign === 'DB1' ? 'selected' : '' %>>DB1</option>
+                                    <option value="DB2" <%= user.callsign === 'DB2' ? 'selected' : '' %>>DB2</option>
+                                    <option value="DB3" <%= user.callsign === 'DB3' ? 'selected' : '' %>>DB3</option>
+                                    <option value="DB4" <%= user.callsign === 'DB4' ? 'selected' : '' %>>DB4</option>
+                                    <option value="DB5" <%= user.callsign === 'DB5' ? 'selected' : '' %>>DB5</option>
+                                    <option value="DB6" <%= user.callsign === 'DB6' ? 'selected' : '' %>>DB6</option>
+                                    <option value="DC1" <%= user.callsign === 'DC1' ? 'selected' : '' %>>DC1</option>
+                                    <option value="DC2" <%= user.callsign === 'DC2' ? 'selected' : '' %>>DC2</option>
+                                    <option value="DC3" <%= user.callsign === 'DC3' ? 'selected' : '' %>>DC3</option>
+                                    <option value="DC4" <%= user.callsign === 'DC4' ? 'selected' : '' %>>DC4</option>
+                                    <option value="DC5" <%= user.callsign === 'DC5' ? 'selected' : '' %>>DC5</option>
+                                    <option value="DC6" <%= user.callsign === 'DC6' ? 'selected' : '' %>>DC6</option>
+                                    <option value="D3A" <%= user.callsign === 'D3A' ? 'selected' : '' %>>D3A</option>
+                                    <option value="D3B" <%= user.callsign === 'D3B' ? 'selected' : '' %>>D3B</option>
+                                    <option value="D3C" <%= user.callsign === 'D3C' ? 'selected' : '' %>>D3C</option>
+                                    <option value="DS1" <%= user.callsign === 'DS1' ? 'selected' : '' %>>DS1</option>
+                                    <option value="DS2" <%= user.callsign === 'DS2' ? 'selected' : '' %>>DS2</option>
+                                    <option value="DS3" <%= user.callsign === 'DS3' ? 'selected' : '' %>>DS3</option>
+                                    <option value="DS4" <%= user.callsign === 'DS4' ? 'selected' : '' %>>DS4</option>
+                                    <option value="Prometheus" <%= user.callsign === 'Prometheus' ? 'selected' : '' %>>Prometheus</option>
+                                    <option value="Prowler 1-1" <%= user.callsign === 'Prowler 1-1' ? 'selected' : '' %>>Prowler 1-1</option>
+                                    <option value="Prowler 1-2" <%= user.callsign === 'Prowler 1-2' ? 'selected' : '' %>>Prowler 1-2</option>
+                                    <option value="Star 1-1" <%= user.callsign === 'Star 1-1' ? 'selected' : '' %>>Star 1-1</option>
+                                    <option value="Star 1-2" <%= user.callsign === 'Star 1-2' ? 'selected' : '' %>>Star 1-2</option>
+                                    <option value="Lifter 1-1" <%= user.callsign === 'Lifter 1-1' ? 'selected' : '' %>>Lifter 1-1</option>
+                                    <option value="Lifter 1-2" <%= user.callsign === 'Lifter 1-2' ? 'selected' : '' %>>Lifter 1-2</option>
+                                    <option value="Bronco 1-1" <%= user.callsign === 'Bronco 1-1' ? 'selected' : '' %>>Bronco 1-1</option>
+                                    <option value="Overlord 1-1" <%= user.callsign === 'Overlord 1-1' ? 'selected' : '' %>>Overlord 1-1</option>
+                                    <option value="Spooky 1-1" <%= user.callsign === 'Spooky 1-1' ? 'selected' : '' %>>Spooky 1-1</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][active]">
+                                    <option value="Active" <%= user.active === 'Active' ? 'selected' : '' %>>Active</option>
+                                    <option value="ELOA" <%= user.active === 'ELOA' ? 'selected' : '' %>>ELOA</option>
+                                    <option value="Reserve" <%= user.active === 'Reserve' ? 'selected' : '' %>>Reserve</option>
+                                    <option value="AWOL" <%= user.active === 'AWOL' ? 'selected' : '' %>>AWOL</option>
+                                    <option value="Retired" <%= user.active === 'Retired' ? 'selected' : '' %>>Retired</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][team]">
+                                    <option value="N/A" <%= user.team === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="Dagger Troop HQ" <%= user.team === 'Dagger Troop HQ' ? 'selected' : '' %>>Dagger Troop HQ</option>
+                                    <option value="Alpha Team" <%= user.team === 'Alpha Team' ? 'selected' : '' %>>Alpha Team</option>
+                                    <option value="Bravo Team" <%= user.team === 'Bravo Team' ? 'selected' : '' %>>Bravo Team</option>
+                                    <option value="Charlie Team" <%= user.team === 'Charlie Team' ? 'selected' : '' %>>Charlie Team</option>
+                                    <option value="Sierra Troop HQ" <%= user.team === 'Sierra Troop HQ' ? 'selected' : '' %>>Sierra Troop HQ</option>
+                                    <option value="Sierra" <%= user.team === 'Sierra' ? 'selected' : '' %>>Sierra</option>
+                                    <option value="Intelligence" <%= user.team === 'Intelligence' ? 'selected' : '' %>>Intelligence</option>
+                                    <option value="Echo" <%= user.team === 'Echo' ? 'selected' : '' %>>Echo</option>
+                                    <option value="ATO HQ" <%= user.team === 'ATO HQ' ? 'selected' : '' %>>ATO HQ</option>
+                                    <option value="Assault Operations Division" <%= user.team === 'Assault Operations Division' ? 'selected' : '' %>>Assault Operations Division</option>
+                                    <option value="Strike Warfare Division" <%= user.team === 'Strike Warfare Division' ? 'selected' : '' %>>Strike Warfare Division</option>
+                                    <option value="Candidate Team" <%= user.team === 'Candidate Team' ? 'selected' : '' %>>Candidate Team</option>
+                                </select>
+                            </td>
+                            <td><%= user.timeInUnit %></td> <!-- Displays days since account creation -->
+                            <td><%= user.timeInRank %></td> <!-- Displays days since rank assignment -->
+                            <td>
+                                <button type="submit" formaction="/delete-user/<%= user._id %>" formmethod="POST" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                            </td>
+                            <input type="hidden" name="users[<%= index %>][id]" value="<%= user._id %>">
+                        </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <button type="submit">Update All Users</button>
+    </div>
+    </form>
+    <form action="/update-all-members" method="POST">
+    <div id="all-members" class="tab-content">
+        <form action="/update-all-members" method="POST">
+        <!-- All Members Content -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Is Admin</th>
+                    <th>Rank</th>
+                    <th>Role</th>
+                    <th>MOS</th>
+                    <th>Callsign</th>
+                    <th>Active</th>
+                    <th>Team</th>
+                    <th>Time in Unit (Days)</th>
+                    <th>Time in Rank (Days)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user, index) => { %>
+                    <% if (user.rank !== 'Civilian') { %>
+                        <tr>
+                            <td><input type="text" name="users[<%= index %>][username]" value="<%= user.username %>"></td>
+                            <td><%= user.email %></td>
+                            <td>
+                                <input type="checkbox" name="users[<%= index %>][isAdmin]" value="true" <%= user.isAdmin ? 'checked' : '' %>>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][rank]">
+                                    <option value="Civilian" <%= user.rank === 'Civilian' ? 'selected' : '' %>>Civilian</option>
+                                    <option value="CAN" <%= user.rank === 'CAN' ? 'selected' : '' %>>CAN</option>
+                                    <option value="SGT" <%= user.rank === 'SGT' ? 'selected' : '' %>>SGT</option>
+                                    <option value="SSG" <%= user.rank === 'SSG' ? 'selected' : '' %>>SSG</option>
+                                    <option value="SFC" <%= user.rank === 'SFC' ? 'selected' : '' %>>SFC</option>
+                                    <option value="MSG" <%= user.rank === 'MSG' ? 'selected' : '' %>>MSG</option>
+                                    <option value="SGM" <%= user.rank === 'SGM' ? 'selected' : '' %>>SGM</option>
+                                    <option value="WOC" <%= user.rank === 'WOC' ? 'selected' : '' %>>WOC</option>
+                                    <option value="WO1" <%= user.rank === 'WO1' ? 'selected' : '' %>>WO1</option>
+                                    <option value="CW2" <%= user.rank === 'CW2' ? 'selected' : '' %>>CW2</option>
+                                    <option value="CW3" <%= user.rank === 'CW3' ? 'selected' : '' %>>CW3</option>
+                                    <option value="CW4" <%= user.rank === 'CW4' ? 'selected' : '' %>>CW4</option>
+                                    <option value="CW5" <%= user.rank === 'CW5' ? 'selected' : '' %>>CW5</option>
+                                    <option value="2LT" <%= user.rank === '2LT' ? 'selected' : '' %>>2LT</option>
+                                    <option value="1LT" <%= user.rank === '1LT' ? 'selected' : '' %>>1LT</option>
+                                    <option value="CPT" <%= user.rank === 'CPT' ? 'selected' : '' %>>CPT</option>
+                                    <option value="MAJ" <%= user.rank === 'MAJ' ? 'selected' : '' %>>MAJ</option>
+                                    <option value="LTC" <%= user.rank === 'LTC' ? 'selected' : '' %>>LTC</option>
+                                    <option value="COL" <%= user.rank === 'COL' ? 'selected' : '' %>>COL</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][role]">
+                                    <option value="N/A" <%= user.role === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="Troop CO" <%= user.role === 'Troop CO' ? 'selected' : '' %>>Troop CO</option>
+                                    <option value="Troop SGM" <%= user.role === 'Troop SGM' ? 'selected' : '' %>>Troop SGM</option>
+                                    <option value="Comms SGT" <%= user.role === 'Comms SGT' ? 'selected' : '' %>>Comms SGT</option>
+                                    <option value="Medical SGT" <%= user.role === 'Medical SGT' ? 'selected' : '' %>>Medical SGT</option>
+                                    <option value="1IC" <%= user.role === '1IC' ? 'selected' : '' %>>1IC</option>
+                                    <option value="2IC" <%= user.role === '2IC' ? 'selected' : '' %>>2IC</option>
+                                    <option value="Medic" <%= user.role === 'Medic' ? 'selected' : '' %>>Medic</option>
+                                    <option value="EOD" <%= user.role === 'EOD' ? 'selected' : '' %>>EOD</option>
+                                    <option value="Pointman" <%= user.role === 'Pointman' ? 'selected' : '' %>>Pointman</option>
+                                    <option value="S.W.T" <%= user.role === 'S.W.T' ? 'selected' : '' %>>S.W.T</option>
+                                    <option value="Assaulter" <%= user.role === 'Assaulter' ? 'selected' : '' %>>Assaulter</option>
+                                    <option value="Sniper" <%= user.role === 'Sniper' ? 'selected' : '' %>>Sniper</option>
+                                    <option value="Spotter" <%= user.role === 'Spotter' ? 'selected' : '' %>>Spotter</option>
+                                    <option value="Intel Officer" <%= user.role === 'Intel Officer' ? 'selected' : '' %>>Intel Officer</option>
+                                    <option value="Intel Analyst" <%= user.role === 'Intel Analyst' ? 'selected' : '' %>>Intel Analyst</option>
+                                    <option value="Squadron CO" <%= user.role === 'Squadron CO' ? 'selected' : '' %>>Squadron CO</option>
+                                    <option value="Squadron XO" <%= user.role === 'Squadron XO' ? 'selected' : '' %>>Squadron XO</option>
+                                    <option value="Lead Pilot" <%= user.role === 'Lead Pilot' ? 'selected' : '' %>>Lead Pilot</option>
+                                    <option value="Pilot" <%= user.role === 'Pilot' ? 'selected' : '' %>>Pilot</option>
+                                    <option value="Candidate" <%= user.role === 'Candidate' ? 'selected' : '' %>>Candidate</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][mos]">
+                                    <option value="N/A" <%= user.mos === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="18X" <%= user.mos === '18X' ? 'selected' : '' %>>18X</option>
+                                    <option value="18B" <%= user.mos === '18B' ? 'selected' : '' %>>18B</option>
+                                    <option value="18A" <%= user.mos === '18A' ? 'selected' : '' %>>18A</option>
+                                    <option value="18Z" <%= user.mos === '18Z' ? 'selected' : '' %>>18Z</option>
+                                    <option value="18F" <%= user.mos === '18F' ? 'selected' : '' %>>18F</option>
+                                    <option value="18E" <%= user.mos === '18E' ? 'selected' : '' %>>18E</option>
+                                    <option value="18D" <%= user.mos === '18D' ? 'selected' : '' %>>18D</option>
+                                    <option value="18C" <%= user.mos === '18C' ? 'selected' : '' %>>18C</option>
+                                    <option value="153E" <%= user.mos === '153E' ? 'selected' : '' %>>153E</option>
+                                    <option value="152C" <%= user.mos === '152C' ? 'selected' : '' %>>152C</option>
+                                    <option value="154E" <%= user.mos === '154E' ? 'selected' : '' %>>154E</option>
+                                    <option value="11F3B" <%= user.mos === '11F3B' ? 'selected' : '' %>>11F3B</option>
+                                    <option value="11SXQ" <%= user.mos === '11SXQ' ? 'selected' : '' %>>11SXQ</option>
+                                    <option value="1A1X3A" <%= user.mos === '1A1X3A' ? 'selected' : '' %>>1A1X3A</option>
+                                    <option value="1U1X1R" <%= user.mos === '1U1X1R' ? 'selected' : '' %>>1U1X1R</option>
+                                </select>
+                            </td>        
+                            <td>
+                                <select name="users[<%= index %>][callsign]">
+                                    <option value="N/A" <%= user.callsign === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="D1A" <%= user.callsign === 'D1A' ? 'selected' : '' %>>D1A</option>
+                                    <option value="D1B" <%= user.callsign === 'D1B' ? 'selected' : '' %>>D1B</option>
+                                    <option value="D1C" <%= user.callsign === 'D1C' ? 'selected' : '' %>>D1C</option>
+                                    <option value="D1D" <%= user.callsign === 'D1D' ? 'selected' : '' %>>D1D</option>
+                                    <option value="DA1" <%= user.callsign === 'DA1' ? 'selected' : '' %>>DA1</option>
+                                    <option value="DA2" <%= user.callsign === 'DA2' ? 'selected' : '' %>>DA2</option>
+                                    <option value="DA3" <%= user.callsign === 'DA3' ? 'selected' : '' %>>DA3</option>
+                                    <option value="DA4" <%= user.callsign === 'DA4' ? 'selected' : '' %>>DA4</option>
+                                    <option value="DA5" <%= user.callsign === 'DA5' ? 'selected' : '' %>>DA5</option>
+                                    <option value="DA6" <%= user.callsign === 'DA6' ? 'selected' : '' %>>DA6</option>
+                                    <option value="DB1" <%= user.callsign === 'DB1' ? 'selected' : '' %>>DB1</option>
+                                    <option value="DB2" <%= user.callsign === 'DB2' ? 'selected' : '' %>>DB2</option>
+                                    <option value="DB3" <%= user.callsign === 'DB3' ? 'selected' : '' %>>DB3</option>
+                                    <option value="DB4" <%= user.callsign === 'DB4' ? 'selected' : '' %>>DB4</option>
+                                    <option value="DB5" <%= user.callsign === 'DB5' ? 'selected' : '' %>>DB5</option>
+                                    <option value="DB6" <%= user.callsign === 'DB6' ? 'selected' : '' %>>DB6</option>
+                                    <option value="DC1" <%= user.callsign === 'DC1' ? 'selected' : '' %>>DC1</option>
+                                    <option value="DC2" <%= user.callsign === 'DC2' ? 'selected' : '' %>>DC2</option>
+                                    <option value="DC3" <%= user.callsign === 'DC3' ? 'selected' : '' %>>DC3</option>
+                                    <option value="DC4" <%= user.callsign === 'DC4' ? 'selected' : '' %>>DC4</option>
+                                    <option value="DC5" <%= user.callsign === 'DC5' ? 'selected' : '' %>>DC5</option>
+                                    <option value="DC6" <%= user.callsign === 'DC6' ? 'selected' : '' %>>DC6</option>
+                                    <option value="D3A" <%= user.callsign === 'D3A' ? 'selected' : '' %>>D3A</option>
+                                    <option value="D3B" <%= user.callsign === 'D3B' ? 'selected' : '' %>>D3B</option>
+                                    <option value="D3C" <%= user.callsign === 'D3C' ? 'selected' : '' %>>D3C</option>
+                                    <option value="DS1" <%= user.callsign === 'DS1' ? 'selected' : '' %>>DS1</option>
+                                    <option value="DS2" <%= user.callsign === 'DS2' ? 'selected' : '' %>>DS2</option>
+                                    <option value="DS3" <%= user.callsign === 'DS3' ? 'selected' : '' %>>DS3</option>
+                                    <option value="DS4" <%= user.callsign === 'DS4' ? 'selected' : '' %>>DS4</option>
+                                    <option value="Prometheus" <%= user.callsign === 'Prometheus' ? 'selected' : '' %>>Prometheus</option>
+                                    <option value="Prowler 1-1" <%= user.callsign === 'Prowler 1-1' ? 'selected' : '' %>>Prowler 1-1</option>
+                                    <option value="Prowler 1-2" <%= user.callsign === 'Prowler 1-2' ? 'selected' : '' %>>Prowler 1-2</option>
+                                    <option value="Star 1-1" <%= user.callsign === 'Star 1-1' ? 'selected' : '' %>>Star 1-1</option>
+                                    <option value="Star 1-2" <%= user.callsign === 'Star 1-2' ? 'selected' : '' %>>Star 1-2</option>
+                                    <option value="Lifter 1-1" <%= user.callsign === 'Lifter 1-1' ? 'selected' : '' %>>Lifter 1-1</option>
+                                    <option value="Lifter 1-2" <%= user.callsign === 'Lifter 1-2' ? 'selected' : '' %>>Lifter 1-2</option>
+                                    <option value="Bronco 1-1" <%= user.callsign === 'Bronco 1-1' ? 'selected' : '' %>>Bronco 1-1</option>
+                                    <option value="Overlord 1-1" <%= user.callsign === 'Overlord 1-1' ? 'selected' : '' %>>Overlord 1-1</option>
+                                    <option value="Spooky 1-1" <%= user.callsign === 'Spooky 1-1' ? 'selected' : '' %>>Spooky 1-1</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][active]">
+                                    <option value="Active" <%= user.active === 'Active' ? 'selected' : '' %>>Active</option>
+                                    <option value="ELOA" <%= user.active === 'ELOA' ? 'selected' : '' %>>ELOA</option>
+                                    <option value="Reserve" <%= user.active === 'Reserve' ? 'selected' : '' %>>Reserve</option>
+                                    <option value="AWOL" <%= user.active === 'AWOL' ? 'selected' : '' %>>AWOL</option>
+                                    <option value="Retired" <%= user.active === 'Retired' ? 'selected' : '' %>>Retired</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="users[<%= index %>][team]">
+                                    <option value="N/A" <%= user.team === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                    <option value="Dagger Troop HQ" <%= user.team === 'Dagger Troop HQ' ? 'selected' : '' %>>Dagger Troop HQ</option>
+                                    <option value="Alpha Team" <%= user.team === 'Alpha Team' ? 'selected' : '' %>>Alpha Team</option>
+                                    <option value="Bravo Team" <%= user.team === 'Bravo Team' ? 'selected' : '' %>>Bravo Team</option>
+                                    <option value="Charlie Team" <%= user.team === 'Charlie Team' ? 'selected' : '' %>>Charlie Team</option>
+                                    <option value="Sierra Troop HQ" <%= user.team === 'Sierra Troop HQ' ? 'selected' : '' %>>Sierra Troop HQ</option>
+                                    <option value="Sierra" <%= user.team === 'Sierra' ? 'selected' : '' %>>Sierra</option>
+                                    <option value="Intelligence" <%= user.team === 'Intelligence' ? 'selected' : '' %>>Intelligence</option>
+                                    <option value="Echo" <%= user.team === 'Echo' ? 'selected' : '' %>>Echo</option>
+                                    <option value="ATO HQ" <%= user.team === 'ATO HQ' ? 'selected' : '' %>>ATO HQ</option>
+                                    <option value="Assault Operations Division" <%= user.team === 'Assault Operations Division' ? 'selected' : '' %>>Assault Operations Division</option>
+                                    <option value="Strike Warfare Division" <%= user.team === 'Strike Warfare Division' ? 'selected' : '' %>>Strike Warfare Division</option>
+                                    <option value="Candidate Team" <%= user.team === 'Candidate Team' ? 'selected' : '' %>>Candidate Team</option>
+                                </select>
+                            </td>
+                            <td><%= user.timeInUnit %></td> <!-- Displays days since account creation -->
+                            <td><%= user.timeInRank %></td> <!-- Displays days since rank assignment -->
+                            <td>
+                                <button type="submit" formaction="/delete-user/<%= user._id %>" formmethod="POST" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                            </td>
+                            <input type="hidden" name="users[<%= index %>][id]" value="<%= user._id %>">
+                        </tr>
+                    <% } %>
+                <% }) %>
+            </tbody>
+        </table>
+        <button type="submit">Update All Members</button>
+        </form>
+        </div>
+
+        <form action="/update-all-applicants" method="POST">
+            <div id="applicants" class="tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Phase 0</th>
+                            <th>Phase 1</th>
+                            <th>Phase 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user, index) => { %>
+                            <% if (user.rank === 'CAN') { %>
+                                <tr>
+                                    <td><%= user.username %></td>
+                                    <td>
+                                        <input type="radio" name="users[<%= index %>][otcphase]" value="phaseZero" <%= user.otcphase === 'phaseZero' ? 'checked' : '' %> />
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="users[<%= index %>][otcphase]" value="phaseOne" <%= user.otcphase === 'phaseOne' ? 'checked' : '' %> />
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="users[<%= index %>][otcphase]" value="phaseTwo" <%= user.otcphase === 'phaseTwo' ? 'checked' : '' %> />
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="users[<%= index %>][otcphase]" value="otcComplete" <%= user.otcphase === 'otcComplete' ? 'checked' : '' %> />
+                                    </td>
+                                    <input type="hidden" name="users[<%= index %>][id]" value="<%= user._id %>" />
+                                </tr>
+                            <% } %>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <button type="submit">Update All Applicants</button>
+            </div>
+        </form>
+        
+
+        <form action="/update-all-civilians" method="POST">
+            <div id="civilians" class="tab-content">
+                <form action="/update-all-civilians" method="POST">
+                <!-- All Members Content -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Is Admin</th>
+                            <th>Rank</th>
+                            <th>Role</th>
+                            <th>MOS</th>
+                            <th>Callsign</th>
+                            <th>Active</th>
+                            <th>Team</th>
+                            <th>Time in Unit (Days)</th>
+                            <th>Time in Rank (Days)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user, index) => { %>
+                            <% if (user.rank === 'Civilian' && !user.hasApplied) { %>
+                                <tr>
+                                    <td><input type="text" name="users[<%= index %>][username]" value="<%= user.username %>"></td>
+                                    <td><%= user.email %></td>
+                                    <td>
+                                        <input type="checkbox" name="users[<%= index %>][isAdmin]" value="true" <%= user.isAdmin ? 'checked' : '' %>>
+                                    </td>
+                                    <td>
+                                        <select name="users[<%= index %>][rank]">
+                                            <option value="Civilian" <%= user.rank === 'Civilian' ? 'selected' : '' %>>Civilian</option>
+                                            <option value="CAN" <%= user.rank === 'CAN' ? 'selected' : '' %>>CAN</option>
+                                            <option value="SGT" <%= user.rank === 'SGT' ? 'selected' : '' %>>SGT</option>
+                                            <option value="SSG" <%= user.rank === 'SSG' ? 'selected' : '' %>>SSG</option>
+                                            <option value="SFC" <%= user.rank === 'SFC' ? 'selected' : '' %>>SFC</option>
+                                            <option value="MSG" <%= user.rank === 'MSG' ? 'selected' : '' %>>MSG</option>
+                                            <option value="SGM" <%= user.rank === 'SGM' ? 'selected' : '' %>>SGM</option>
+                                            <option value="WOC" <%= user.rank === 'WOC' ? 'selected' : '' %>>WOC</option>
+                                            <option value="WO1" <%= user.rank === 'WO1' ? 'selected' : '' %>>WO1</option>
+                                            <option value="CW2" <%= user.rank === 'CW2' ? 'selected' : '' %>>CW2</option>
+                                            <option value="CW3" <%= user.rank === 'CW3' ? 'selected' : '' %>>CW3</option>
+                                            <option value="CW4" <%= user.rank === 'CW4' ? 'selected' : '' %>>CW4</option>
+                                            <option value="CW5" <%= user.rank === 'CW5' ? 'selected' : '' %>>CW5</option>
+                                            <option value="2LT" <%= user.rank === '2LT' ? 'selected' : '' %>>2LT</option>
+                                            <option value="1LT" <%= user.rank === '1LT' ? 'selected' : '' %>>1LT</option>
+                                            <option value="CPT" <%= user.rank === 'CPT' ? 'selected' : '' %>>CPT</option>
+                                            <option value="MAJ" <%= user.rank === 'MAJ' ? 'selected' : '' %>>MAJ</option>
+                                            <option value="LTC" <%= user.rank === 'LTC' ? 'selected' : '' %>>LTC</option>
+                                            <option value="COL" <%= user.rank === 'COL' ? 'selected' : '' %>>COL</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="users[<%= index %>][role]">
+                                            <option value="N/A" <%= user.role === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                            <option value="Troop CO" <%= user.role === 'Troop CO' ? 'selected' : '' %>>Troop CO</option>
+                                            <option value="Troop SGM" <%= user.role === 'Troop SGM' ? 'selected' : '' %>>Troop SGM</option>
+                                            <option value="Comms SGT" <%= user.role === 'Comms SGT' ? 'selected' : '' %>>Comms SGT</option>
+                                            <option value="Medical SGT" <%= user.role === 'Medical SGT' ? 'selected' : '' %>>Medical SGT</option>
+                                            <option value="1IC" <%= user.role === '1IC' ? 'selected' : '' %>>1IC</option>
+                                            <option value="2IC" <%= user.role === '2IC' ? 'selected' : '' %>>2IC</option>
+                                            <option value="Medic" <%= user.role === 'Medic' ? 'selected' : '' %>>Medic</option>
+                                            <option value="EOD" <%= user.role === 'EOD' ? 'selected' : '' %>>EOD</option>
+                                            <option value="Pointman" <%= user.role === 'Pointman' ? 'selected' : '' %>>Pointman</option>
+                                            <option value="S.W.T" <%= user.role === 'S.W.T' ? 'selected' : '' %>>S.W.T</option>
+                                            <option value="Assaulter" <%= user.role === 'Assaulter' ? 'selected' : '' %>>Assaulter</option>
+                                            <option value="Sniper" <%= user.role === 'Sniper' ? 'selected' : '' %>>Sniper</option>
+                                            <option value="Spotter" <%= user.role === 'Spotter' ? 'selected' : '' %>>Spotter</option>
+                                            <option value="Intel Officer" <%= user.role === 'Intel Officer' ? 'selected' : '' %>>Intel Officer</option>
+                                            <option value="Intel Analyst" <%= user.role === 'Intel Analyst' ? 'selected' : '' %>>Intel Analyst</option>
+                                            <option value="Squadron CO" <%= user.role === 'Squadron CO' ? 'selected' : '' %>>Squadron CO</option>
+                                            <option value="Squadron XO" <%= user.role === 'Squadron XO' ? 'selected' : '' %>>Squadron XO</option>
+                                            <option value="Lead Pilot" <%= user.role === 'Lead Pilot' ? 'selected' : '' %>>Lead Pilot</option>
+                                            <option value="Pilot" <%= user.role === 'Pilot' ? 'selected' : '' %>>Pilot</option>
+                                            <option value="Candidate" <%= user.role === 'Candidate' ? 'selected' : '' %>>Candidate</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="users[<%= index %>][mos]">
+                                            <option value="N/A" <%= user.mos === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                            <option value="18X" <%= user.mos === '18X' ? 'selected' : '' %>>18X</option>
+                                            <option value="18B" <%= user.mos === '18B' ? 'selected' : '' %>>18B</option>
+                                            <option value="18A" <%= user.mos === '18A' ? 'selected' : '' %>>18A</option>
+                                            <option value="18Z" <%= user.mos === '18Z' ? 'selected' : '' %>>18Z</option>
+                                            <option value="18F" <%= user.mos === '18F' ? 'selected' : '' %>>18F</option>
+                                            <option value="18E" <%= user.mos === '18E' ? 'selected' : '' %>>18E</option>
+                                            <option value="18D" <%= user.mos === '18D' ? 'selected' : '' %>>18D</option>
+                                            <option value="18C" <%= user.mos === '18C' ? 'selected' : '' %>>18C</option>
+                                            <option value="153E" <%= user.mos === '153E' ? 'selected' : '' %>>153E</option>
+                                            <option value="152C" <%= user.mos === '152C' ? 'selected' : '' %>>152C</option>
+                                            <option value="154E" <%= user.mos === '154E' ? 'selected' : '' %>>154E</option>
+                                            <option value="11F3B" <%= user.mos === '11F3B' ? 'selected' : '' %>>11F3B</option>
+                                            <option value="11SXQ" <%= user.mos === '11SXQ' ? 'selected' : '' %>>11SXQ</option>
+                                            <option value="1A1X3A" <%= user.mos === '1A1X3A' ? 'selected' : '' %>>1A1X3A</option>
+                                            <option value="1U1X1R" <%= user.mos === '1U1X1R' ? 'selected' : '' %>>1U1X1R</option>
+                                        </select>
+                                    </td>        
+                                    <td>
+                                        <select name="users[<%= index %>][callsign]">
+                                            <option value="N/A" <%= user.callsign === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                            <option value="D1A" <%= user.callsign === 'D1A' ? 'selected' : '' %>>D1A</option>
+                                            <option value="D1B" <%= user.callsign === 'D1B' ? 'selected' : '' %>>D1B</option>
+                                            <option value="D1C" <%= user.callsign === 'D1C' ? 'selected' : '' %>>D1C</option>
+                                            <option value="D1D" <%= user.callsign === 'D1D' ? 'selected' : '' %>>D1D</option>
+                                            <option value="DA1" <%= user.callsign === 'DA1' ? 'selected' : '' %>>DA1</option>
+                                            <option value="DA2" <%= user.callsign === 'DA2' ? 'selected' : '' %>>DA2</option>
+                                            <option value="DA3" <%= user.callsign === 'DA3' ? 'selected' : '' %>>DA3</option>
+                                            <option value="DA4" <%= user.callsign === 'DA4' ? 'selected' : '' %>>DA4</option>
+                                            <option value="DA5" <%= user.callsign === 'DA5' ? 'selected' : '' %>>DA5</option>
+                                            <option value="DA6" <%= user.callsign === 'DA6' ? 'selected' : '' %>>DA6</option>
+                                            <option value="DB1" <%= user.callsign === 'DB1' ? 'selected' : '' %>>DB1</option>
+                                            <option value="DB2" <%= user.callsign === 'DB2' ? 'selected' : '' %>>DB2</option>
+                                            <option value="DB3" <%= user.callsign === 'DB3' ? 'selected' : '' %>>DB3</option>
+                                            <option value="DB4" <%= user.callsign === 'DB4' ? 'selected' : '' %>>DB4</option>
+                                            <option value="DB5" <%= user.callsign === 'DB5' ? 'selected' : '' %>>DB5</option>
+                                            <option value="DB6" <%= user.callsign === 'DB6' ? 'selected' : '' %>>DB6</option>
+                                            <option value="DC1" <%= user.callsign === 'DC1' ? 'selected' : '' %>>DC1</option>
+                                            <option value="DC2" <%= user.callsign === 'DC2' ? 'selected' : '' %>>DC2</option>
+                                            <option value="DC3" <%= user.callsign === 'DC3' ? 'selected' : '' %>>DC3</option>
+                                            <option value="DC4" <%= user.callsign === 'DC4' ? 'selected' : '' %>>DC4</option>
+                                            <option value="DC5" <%= user.callsign === 'DC5' ? 'selected' : '' %>>DC5</option>
+                                            <option value="DC6" <%= user.callsign === 'DC6' ? 'selected' : '' %>>DC6</option>
+                                            <option value="D3A" <%= user.callsign === 'D3A' ? 'selected' : '' %>>D3A</option>
+                                            <option value="D3B" <%= user.callsign === 'D3B' ? 'selected' : '' %>>D3B</option>
+                                            <option value="D3C" <%= user.callsign === 'D3C' ? 'selected' : '' %>>D3C</option>
+                                            <option value="DS1" <%= user.callsign === 'DS1' ? 'selected' : '' %>>DS1</option>
+                                            <option value="DS2" <%= user.callsign === 'DS2' ? 'selected' : '' %>>DS2</option>
+                                            <option value="DS3" <%= user.callsign === 'DS3' ? 'selected' : '' %>>DS3</option>
+                                            <option value="DS4" <%= user.callsign === 'DS4' ? 'selected' : '' %>>DS4</option>
+                                            <option value="Prometheus" <%= user.callsign === 'Prometheus' ? 'selected' : '' %>>Prometheus</option>
+                                            <option value="Prowler 1-1" <%= user.callsign === 'Prowler 1-1' ? 'selected' : '' %>>Prowler 1-1</option>
+                                            <option value="Prowler 1-2" <%= user.callsign === 'Prowler 1-2' ? 'selected' : '' %>>Prowler 1-2</option>
+                                            <option value="Star 1-1" <%= user.callsign === 'Star 1-1' ? 'selected' : '' %>>Star 1-1</option>
+                                            <option value="Star 1-2" <%= user.callsign === 'Star 1-2' ? 'selected' : '' %>>Star 1-2</option>
+                                            <option value="Lifter 1-1" <%= user.callsign === 'Lifter 1-1' ? 'selected' : '' %>>Lifter 1-1</option>
+                                            <option value="Lifter 1-2" <%= user.callsign === 'Lifter 1-2' ? 'selected' : '' %>>Lifter 1-2</option>
+                                            <option value="Bronco 1-1" <%= user.callsign === 'Bronco 1-1' ? 'selected' : '' %>>Bronco 1-1</option>
+                                            <option value="Overlord 1-1" <%= user.callsign === 'Overlord 1-1' ? 'selected' : '' %>>Overlord 1-1</option>
+                                            <option value="Spooky 1-1" <%= user.callsign === 'Spooky 1-1' ? 'selected' : '' %>>Spooky 1-1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="users[<%= index %>][active]">
+                                            <option value="Active" <%= user.active === 'Active' ? 'selected' : '' %>>Active</option>
+                                            <option value="ELOA" <%= user.active === 'ELOA' ? 'selected' : '' %>>ELOA</option>
+                                            <option value="Reserve" <%= user.active === 'Reserve' ? 'selected' : '' %>>Reserve</option>
+                                            <option value="AWOL" <%= user.active === 'AWOL' ? 'selected' : '' %>>AWOL</option>
+                                            <option value="Retired" <%= user.active === 'Retired' ? 'selected' : '' %>>Retired</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="users[<%= index %>][team]">
+                                            <option value="N/A" <%= user.team === 'N/A' ? 'selected' : '' %>>N/A</option>
+                                            <option value="Dagger Troop HQ" <%= user.team === 'Dagger Troop HQ' ? 'selected' : '' %>>Dagger Troop HQ</option>
+                                            <option value="Alpha Team" <%= user.team === 'Alpha Team' ? 'selected' : '' %>>Alpha Team</option>
+                                            <option value="Bravo Team" <%= user.team === 'Bravo Team' ? 'selected' : '' %>>Bravo Team</option>
+                                            <option value="Charlie Team" <%= user.team === 'Charlie Team' ? 'selected' : '' %>>Charlie Team</option>
+                                            <option value="Sierra Troop HQ" <%= user.team === 'Sierra Troop HQ' ? 'selected' : '' %>>Sierra Troop HQ</option>
+                                            <option value="Sierra" <%= user.team === 'Sierra' ? 'selected' : '' %>>Sierra</option>
+                                            <option value="Intelligence" <%= user.team === 'Intelligence' ? 'selected' : '' %>>Intelligence</option>
+                                            <option value="Echo" <%= user.team === 'Echo' ? 'selected' : '' %>>Echo</option>
+                                            <option value="ATO HQ" <%= user.team === 'ATO HQ' ? 'selected' : '' %>>ATO HQ</option>
+                                            <option value="Assault Operations Division" <%= user.team === 'Assault Operations Division' ? 'selected' : '' %>>Assault Operations Division</option>
+                                            <option value="Strike Warfare Division" <%= user.team === 'Strike Warfare Division' ? 'selected' : '' %>>Strike Warfare Division</option>
+                                            <option value="Candidate Team" <%= user.team === 'Candidate Team' ? 'selected' : '' %>>Candidate Team</option>
+                                        </select>
+                                    </td>
+                                    <td><%= user.timeInUnit %></td> <!-- Displays days since account creation -->
+                                    <td><%= user.timeInRank %></td> <!-- Displays days since rank assignment -->
+                                    <td>
+                                        <button type="submit" formaction="/delete-user/<%= user._id %>" formmethod="POST" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                                    </td>
+                                    <input type="hidden" name="users[<%= index %>][id]" value="<%= user._id %>">
+                                </tr>
+                            <% } %>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <button type="submit">Update All Civilians</button>
+                </form>
+                </div>  
+                
+                <div id="dress-uniform-creation" class="tab-content">
+                    <form id="uniformForm" action="/generate" method="POST">
+                        <label for="userSelect">Select User:</label>
+                        <select id="userSelect" name="userId">
+                            <option value="" selected disabled>Select a user...</option>
+                            <% users.forEach(user => { %>
+                                <option value="<%= user._id %>" <%= selectedUserId === user._id.toString() ? 'selected' : '' %>><%= user.username %></option>
+                            <% }); %>
+                        </select>
+                        <div class="rewards-section">
+                            <h2>Rewards:</h2>
+                            <% Object.keys(sortedImages).forEach(category => { %>
+                                <div class="column">
+                                    <h3><%= category %></h3>
+                                    <% sortedImages[category].forEach(reward => { %>
+                                        <div class="item">
+                                            <label>
+                                                <input type="checkbox" class="reward-checkbox" name="rewards" value="<%= category %>/<%= reward %>">
+                                                <%= reward.replace(/^\d+/, '').replace(/_/g, ' ') %>
+                                            </label>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            <% }); %>
+                        </div>
+                        <button type="submit">Generate Dress Uniform</button>
+                    </form>
+                </div>
+
+                <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.tab');
+        const form = document.getElementById('admin-form');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const activeTab = document.querySelector('.tab.active');
+                const activeContent = document.querySelector('.tab-content.active');
+                
+                if (activeTab) activeTab.classList.remove('active');
+                if (activeContent) activeContent.classList.remove('active');
+
+                this.classList.add('active');
+                const tabContentId = this.getAttribute('data-tab');
+                const newActiveContent = document.getElementById(tabContentId);
+                newActiveContent.classList.add('active');
+
+                switch (tabContentId) {
+                    case 'all-members':
+                        form.action = '/update-all-members';
+                        break;
+                    case 'applicants':
+                        form.action = '/update-all-applicants';
+                        break;
+                    case 'civilians':
+                        form.action = '/update-civilians';
+                        break;
+                    default:
+                        form.action = '/update-all-users';
+                }
+            });
+        });
+
+        // Fetch current phase state for each applicant and update UI
+        const userSelect = document.getElementById('userSelect');
+        if (userSelect) {
+            userSelect.addEventListener('change', function() {
+                const userId = this.value;
+                if (userId) {
+                    fetch(`/user-otcphase/${userId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.querySelectorAll('.phase-checkbox').forEach(checkbox => {
+                                checkbox.checked = data[checkbox.value] === true;
+                            });
+                        })
+                        .catch(error => console.error('Error fetching user OTC phase:', error));
+                }
+            });
+        }
+
+        // Trigger change event on page load to load the selected user's phases
+        if (userSelect) {
+            userSelect.dispatchEvent(new Event('change'));
+        }
+    });
+                
+                    document.getElementById('userSelect').addEventListener('change', function() {
+                        const userId = this.value;
+                        console.log(`User selected: ${userId}`);
+                        if (userId) {
+                            fetch(`/user-rewards/${userId}`)
+                                .then(response => {
+                                    console.log('Fetch response:', response);
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    console.log('Rewards data received:', data);
+                                    document.querySelectorAll('.reward-checkbox').forEach(checkbox => {
+                                        const rewardKey = checkbox.value.split('/')[1].toUpperCase().replace(/-/g, '_');
+                                        console.log(`Processing reward key: ${rewardKey}`);
+                                        checkbox.checked = data[rewardKey] === true;
+                                        console.log(`Checkbox ${rewardKey} is ${checkbox.checked ? 'checked' : 'unchecked'}`);
+                                    });
+                                })
+                                .catch(error => console.error('Error fetching user rewards:', error));
+                        }
+                    });
+                </script>
+</body>
+</html>

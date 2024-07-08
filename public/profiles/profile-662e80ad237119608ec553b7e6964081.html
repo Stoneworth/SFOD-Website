@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-profiles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <title>D. Stoneworth's Profile</title>
+</head>
+
+<body>
+    <div class="content">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                
+                    <div class="dropdown">
+                        <li><button class="dropbtn2">D. Stoneworth</button></li> 
+                        <div class="dropdown-content">
+                            <a href="/profile-662e80ad237119608ec553b7e6964081.html">My Profile</a>
+                            
+                                <a href="/dashboard">Dashboard</a>
+                            
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/orbat-nato">ORBAT</a></li>
+                <li><a href="/recruitment">Squadrons</a></li>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="nav-links">
+                
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn">D. Stoneworth</button>
+                        <div class="dropdown-content">
+                            <a href="/profile-662e80ad237119608ec553b7e6964081.html">My Profile</a>
+                            
+                                <a href="/dashboard">Dashboard</a>
+                            
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+        <div class="info-dress-container">
+            <div class="profile-container">
+                <div class="rank-box">
+                    <div class="rank-info">
+                        <a><img id="rank-image" src="" alt="Rank Image" class="rank-image"></a>
+                        <p class="rank-text">2LT</p> <!-- New paragraph for rank -->
+                        <p class="username">D. Stoneworth</p>
+                        <p class="rank-assigned-date" id="rank-assigned-date">Time in Rank: </p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="tabs">
+                        <button class="tab-button tab-button-overview" onclick="openTab('overview')">Overview</button>
+                        <button class="tab-button tab-button-assignments" onclick="openTab('assignments', true)">Assignments</button>
+                        <button class="tab-button tab-button-service-record" onclick="openTab('service-record', true)">Service Record</button>
+                    </div>                
+                    <div class="tab-content overview-tab-content" id="overview">
+                        <div class="grid-container">
+                            <div class="team-info">
+                                <p class="label">Team:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">FCD HQ</p>
+                            </div>
+                            <div class="role-info">
+                                <p class="label">Role:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">Squadron XO</p>
+                            </div>
+                            <div class="mos-info">
+                                <p class="label">MOS:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">152C</p>
+                            </div>
+                            <div class="callsign-info">
+                                <p class="label">Callsign:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">N/A</p>
+                            </div>
+                            <div class="country-info">
+                                <p class="label">Country:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">Ireland</p>
+                            </div>
+                            <div class="profile-creation">
+                                <p class="label">Time In Unit:</p>
+                                <hr class="horizontal-line">
+                                <p class="profile-created-date" id="profile-created-date">Time in Unit: </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="assignments" class="tab-content" style="display:none;">
+                        
+                        <ul class="assignments-list">
+                            
+                                <p>D. Stoneworth's team changed from: N/A to FCD HQ July 4, 2024</p>
+                            
+                                <p>D. Stoneworth's rank changed from: Civilian to 2LT July 4, 2024</p>
+                            
+                                <p>D. Stoneworth's role changed from: N/A to Squadron XO July 4, 2024</p>
+                            
+                        </ul>
+                        
+                        
+                        <div class="pagination">
+                            
+                            
+                                
+                                    <span class="current-page">1</span>
+                                
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="tab-content" id="service-record" style="display:none;">
+                        
+                            <ul class="rewards-list">
+                                
+                                    <p>D. Stoneworth has been awarded the Senior Instructor Badge on July 4, 2024</p>
+                                
+                                    <p>D. Stoneworth has been awarded the Gold Recruiter Badge on July 4, 2024</p>
+                                
+                                    <p>D. Stoneworth has been awarded the Army Aviator Badge on July 4, 2024</p>
+                                
+                            </ul>
+                        
+                        
+                        <div class="pagination">
+                            
+                            
+                                
+                                    <span class="current-page">1</span>
+                                
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="no-dress-image ">
+                </div>
+                
+                <div class="dress-image-container">
+                    <img src="img/profile-dress/dress-662e80ad237119608ec553b7e6964081.png" alt="Dress Image" class="dress-image">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="background-container">
+        <img src="img/profile-wolf.png" class="profile-wolf-image" alt="Background Image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rank = '2LT';
+            const rankImage = document.getElementById('rank-image');
+            const rankAssignedDateElem = document.getElementById('rank-assigned-date');
+            const profileCreatedDateElem = document.getElementById('profile-created-date');
+            const rankAssignedDate = new Date('Thu Jul 04 2024 21:05:05 GMT+0100 (British Summer Time)');
+            const profileCreatedDate = new Date('Thu Jul 04 2024 21:01:22 GMT+0100 (British Summer Time)');
+            const today = new Date();
+            const diffTime = Math.abs(today - rankAssignedDate);
+            const diffTime2 = Math.abs(today - profileCreatedDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffDays2 = Math.ceil(diffTime2 / (1000 * 60 * 60 * 24));
+    
+            rankAssignedDateElem.textContent = `Time in Rank: ${diffDays} Day(s)`;
+            profileCreatedDateElem.textContent = `${diffDays2} Day(s)`;
+    
+            const rankMap = {
+                'Civilian': { src: '/img/wolf.png', title: 'Civilian' },
+                'SGT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant.svg', title: 'Sergeant' },
+                'CAN': { src: 'https://3rdinf.us/uploads/rank_images/pvt.png.f60ee5b9c6108b5511edc5ec31ab8e11.png', title: 'Candidate' },
+                'SSG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/staff_sergeant.svg', title: 'Staff Sergeant' },
+                'SFC': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_first_class.svg', title: 'Sergeant First Class' },
+                'MSG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/master_sergeant.svg', title: 'Master Sergeant' },
+                '1SG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/first_sergeant.svg', title: 'First Sergeant' },
+                'SGM': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_major.svg', title: 'Sergeant Major' },
+                'WOC': { src: 'https://cdn.shopify.com/s/files/1/0591/2395/7944/products/woc-letters-officer-army-branch-service-badge-in-black-metal-441649.png?v=1656057628', title: 'Warrant Officer Candidate' },
+                'WO1': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/cw1.jpg', title: 'Warrant Officer 1' },
+                'CW2': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/cw2.jpg', title: 'Chief Warrant Officer 2' },
+                'CW3': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw3.svg', title: 'Chief Warrant Officer 3' },
+                'CW4': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw4.svg', title: 'Chief Warrant Officer 4' },
+                '2LT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/second_lieutenant.svg', title: 'Second Lieutenant' },
+                '1LT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/first_lieutenant.svg', title: 'First Lieutenant' },
+                'CPT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/captain.svg', title: 'Captain' },
+                'MAJ': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/major.svg', title: 'Major' },
+                'LTC': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/lieutenant_colonel.svg', title: 'Lieutenant Colonel' },
+                'COL': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/colonel.svg', title: 'Colonel' },
+            };
+    
+            if (rankMap[rank]) {
+                rankImage.src = rankMap[rank].src;
+                rankImage.title = rankMap[rank].title;
+            }
+    
+            function openTab(tabName, resetPage = false) {
+                const tabcontent = document.getElementsByClassName("tab-content");
+                const tablinks = document.getElementsByClassName("tab-button");
+    
+                for (let i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                    tabcontent[i].classList.remove('active');
+                }
+    
+                for (let i = 0; i < tablinks.length; i++) {
+                    tablinks[i].classList.remove('active');
+                }
+    
+                document.getElementById(tabName).style.display = "block";
+                document.getElementById(tabName).classList.add('active');
+    
+                document.querySelector(`.tab-button-${tabName}`).classList.add('active');
+    
+                var urlParams = new URLSearchParams(window.location.search);
+                if (resetPage) {
+                    urlParams.set('page', '1');
+                }
+                urlParams.set('tab', tabName);
+                var newUrl = window.location.pathname + '?' + urlParams.toString();
+    
+                if (resetPage) {
+                    window.location.href = newUrl;
+                } else {
+                    window.history.replaceState(null, null, newUrl);
+                }
+            }
+    
+            const initialTab = new URLSearchParams(window.location.search).get('tab') || 'overview';
+            openTab(initialTab);
+    
+            document.querySelector('.tab-button-overview').addEventListener('click', function() {
+                openTab('overview');
+            });
+    
+            document.querySelector('.tab-button-assignments').addEventListener('click', function() {
+                openTab('assignments', true);
+            });
+    
+            document.querySelector('.tab-button-service-record').addEventListener('click', function() {
+                openTab('service-record', true);
+            });
+        });
+
+        function toggleMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("navigation-menu").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="stylesheet" href="style-orbat-nato.css">
+    <title>ORBAT - 1st SFOD-D (NATO)</title>
+</head>
+<body>
+
+<div class ="navigation">
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                <% if (user) { %>
+                    <div class="dropdown">
+                       <li><button class="dropbtn2"><%= user.username %></button></li> 
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <li><a href="/login" class="login-small">Log-In</a></li>
+                <% } %>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/orbat-nato">ORBAT</a></li>
+                <li><a href="/recruitment">Squadrons</a></li>
+            </ul>
+        </div>    
+        <div class="navbar">
+            <div class="nav-links">
+                <% if (user) { %>
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn"><%= user.username %></button>
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="nav-button">Log-In</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cag-container">
+    <img src="/img/orbat/military_markings/cag.png" alt="CAG">
+    <div class="element-title">1st Special Forces Operational<br>Detachment - Delta</div>
+    <svg class="lineSFODtoONETROOP">
+        <line x1="50%" y1="280" x2="50%" y2="360" stroke="black" stroke-width="5"/>
+    </svg>
+    <div class="one-troop-container">
+        <div class="one-troop-hq-container">
+            <img src="/img/orbat/military_markings/sf_hq.png" alt="SF HQ" class="<%= oneTroopHQ.length === 0 ? 'img-blank' : '' %>">
+            <div class="element-title <%= oneTroopHQ.length === 0 ? 'title-blank' : '' %>">DAGGER | Troop HQ | <br>1 Troop</div>
+            <% if (oneTroopHQ.length === 0) { %>
+            <% } else { %>
+                <div class="troop-hq-members">
+                    <% oneTroopHQ.forEach(function(member) { %>
+                        <div class="member">
+                            <a href="/profile-<%= member.saltProfile %>.html">
+                                <%= member.rank %> <%= member.username %>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+            <svg class="lineTroopHQtoTeams">                   
+                <line x1="50%" y1="0" x2="50%" y2="100" stroke="black" stroke-width="5"/>
+                <line x1="0%" y1="100" x2="100%" y2="100" stroke="black" stroke-width="5"/>
+                <line x1="50%" y1="100" x2="50%" y2="200" stroke="black" stroke-width="5"/>
+                <line x1="0%" y1="100" x2="0%" y2="200" stroke="black" stroke-width="10"/>
+                <line x1="100%" y1="100" x2="100%" y2="200" stroke="black" stroke-width="10"/>
+            </svg>
+            <div class="teams-container">
+                <div class="alpha-team-container <%= alphaTeam.length === 0 ? 'blank-container' : '' %>">
+                    <img src="/img/orbat/military_markings/sf_team.png" alt="Alpha Team" class="<%= alphaTeam.length === 0 ? 'img-blank' : '' %>">
+                    <div class="element-title <%= alphaTeam.length === 0 ? 'title-blank' : '' %>">Alpha Team | 1 Troop</div>
+                    <% if (alphaTeam.length === 0) { %>
+    
+                    <% } else { %>
+                        <div class="alpha-members">
+                            <% alphaTeam.forEach(function(member) { %>
+                                <div class="member">
+                                    <a href="/profile-<%= member.saltProfile %>.html">
+                                        <%= member.rank %> <%= member.username %>
+                                    </a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="bravo-team-container <%= bravoTeam.length === 0 ? 'blank-container' : '' %>">
+                    <img src="/img/orbat/military_markings/sf_team.png" alt="Bravo Team" class="<%= bravoTeam.length === 0 ? 'img-blank' : '' %>">
+                    <div class="element-title <%= bravoTeam.length === 0 ? 'title-blank' : '' %>">Bravo Team | 1 Troop</div>
+                    <% if (bravoTeam.length === 0) { %>
+    
+                    <% } else { %>
+                        <div class="bravo-members">
+                            <% bravoTeam.forEach(function(member) { %>
+                                <div class="member">
+                                    <a href="/profile-<%= member.saltProfile %>.html">
+                                        <%= member.rank %> <%= member.username %>
+                                    </a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="charlie-team-container <%= charlieTeam.length === 0 ? 'blank-container' : '' %>">
+                    <img src="/img/orbat/military_markings/sf_team.png" alt="Charlie Team" class="<%= charlieTeam.length === 0 ? 'img-blank' : '' %>">
+                    <div class="element-title <%= charlieTeam.length === 0 ? 'title-blank' : '' %>">Charlie Team | 1 Troop</div>
+                    <% if (charlieTeam.length === 0) { %>
+    
+                    <% } else { %>
+                        <div class="charlie-members">
+                            <% charlieTeam.forEach(function(member) { %>
+                                <div class="member">
+                                    <a href="/profile-<%= member.saltProfile %>.html">
+                                        <%= member.rank %> <%= member.username %>
+                                    </a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="three-troop-container">
+        <div class="three-troop-hq-container">
+            <img src="/img/orbat/military_markings/sf_hq.png" alt="SIERRA HQ" class="<%= threeTroopHQ.length === 0 ? 'img-blank' : '' %>">
+            <div class="element-title <%= threeTroopHQ.length === 0 ? 'title-blank' : '' %>">SIERRA | 3 Troop | <br>Troop HQ</div>
+            <% if (threeTroopHQ.length === 0) { %>
+            <% } else { %>
+                <div class="three-troop-hq-members">
+                    <% threeTroopHQ.forEach(function(member) { %>
+                        <div class="member">
+                            <a href="/profile-<%= member.saltProfile %>.html">
+                                <%= member.rank %> <%= member.username %>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+            <svg class="lineThreeTroopHQtoSierra">
+                <line x1="50%" y1="5%" x2="50%" y2="80%" stroke="black" stroke-width="5"/>
+            </svg>
+            <div class = "sierra-team-container">
+                <img src="/img/orbat/military_markings/sf_team.png" alt="Sierra Team" class="<%= sierraTeam.length === 0 ? 'img-blank' : '' %>">
+                    <div class="element-title <%= sierraTeam.length === 0 ? 'title-blank' : '' %>">Sierra Team | 3 Troop</div>
+                    <% if (sierraTeam.length === 0) { %>
+                    <% } else { %>
+                        <div class="sierra-members">
+                            <% sierraTeam.forEach(function(member) { %>
+                                <div class="member">
+                                    <a href="/profile-<%= member.saltProfile %>.html">
+                                        <%= member.rank %> <%= member.username %>
+                                    </a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="echo-team-container">
+        <img src="/img/orbat/military_markings/sf_team.png" alt="Echo Team" class="<%= echoTeam.length === 0 ? 'img-blank' : '' %>">
+        <div class="element-title <%= echoTeam.length === 0 ? 'title-blank' : '' %>">Echo Team | 1 Troop |<br> Overflow</div>
+        <% if (echoTeam.length === 0) { %>
+            <div class="blank-message"><BLANK></div>
+        <% } else { %>
+            <div class="echo-members">
+                <% echoTeam.forEach(function(member) { %>
+                    <div class="member">
+                        <a href="/profile-<%= member.saltProfile %>.html">
+                            <%= member.rank %> <%= member.username %>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+    <div class="combat-support-container">
+        <img src="/img/orbat/military_markings/zeus.png" alt="Combat Support" class="<%= combatSupport.length === 0 ? 'img-blank' : '' %>">
+        <div class="element-title <%= combatSupport.length === 0 ? 'title-blank' : '' %>">Combat Support Squadron<br>Prometheus</div>
+        <% if (combatSupport.length === 0) { %>
+            <div class="blank-message"><BLANK></div>
+        <% } else { %>
+            <div class="echo-members">
+                <% combatSupport.forEach(function(member) { %>
+                    <div class="member">
+                        <a href="/profile-<%= member.saltProfile %>.html">
+                            <%= member.rank %> <%= member.username %>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+        </div>
+
+        <div class="ato-squadron-container">
+            <div class="ato-hq-container">
+                <img src="/img/orbat/military_markings/ato_hq.png" alt="ATO HQ" class="<%= ATOHQ.length === 0 ? 'img-blank' : '' %>">
+                <div class="element-title <%= ATOHQ.length === 0 ? 'title-blank' : '' %>">Aviation Technology Office <br>E Squadron <br>Squadron HQ</div>
+                <% if (ATOHQ.length === 0) { %>
+                <% } else { %>
+                    <div class="ato-hq-members">
+                        <% ATOHQ.forEach(function(member) { %>
+                            <div class="member">
+                                <a href="/profile-<%= member.saltProfile %>.html">
+                                    <%= member.rank %> <%= member.username %>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+                <svg class="lineATOHQtoTeams">
+                    <line x1="50%" y1="0" x2="50%" y2="50%" stroke="black" stroke-width="5"/>
+                    <line x1="50%" y1="50%" x2="0%" y2="50%" stroke="black" stroke-width="5"/>
+                    <line x1="0%" y1="50%" x2="0%" y2="100%" stroke="black" stroke-width="10"/>
+                    <line x1="50%" y1="50%" x2="100%" y2="50%" stroke="black" stroke-width="5"/>
+                    <line x1="100%" y1="50%" x2="100%" y2="100%" stroke="black" stroke-width="10"/>
+                </svg>
+                <div class="ato-team-container">
+                    <div class="aod-team-container <%= ATOAOD.length === 0 ? 'blank-container' : '' %>">
+                        <img src="/img/orbat/military_markings/ato_team.png" alt="Alpha Team" class="<%= ATOAOD.length === 0 ? 'img-blank' : '' %>">
+                        <div class="element-title <%= ATOAOD.length === 0 ? 'title-blank' : '' %>">Assault Operations<br>Division</div>
+                        <% if (ATOAOD.length === 0) { %>
+                            <!-- No members in Assault Operations Division -->
+                        <% } else { %>
+                            <div class="ato-aod-members">
+                                <% ATOAOD.forEach(function(member) { %>
+                                    <div class="member">
+                                        <a href="/profile-<%= member.saltProfile %>.html">
+                                            <%= member.rank %> <%= member.username %>
+                                        </a>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="swd-team-container <%= ATOSWD.length === 0 ? 'blank-container' : '' %>">
+                        <img src="/img/orbat/military_markings/ato_team.png" alt="Bravo Team" class="<%= ATOSWD.length === 0 ? 'img-blank' : '' %>">
+                        <div class="element-title <%= ATOSWD.length === 0 ? 'title-blank' : '' %>">Strike Warfare<br>Division</div>
+                        <% if (ATOSWD.length === 0) { %>
+                            <!-- No members in Strike Warfare Division -->
+                        <% } else { %>
+                            <div class="ato-swd-members">
+                                <% ATOSWD.forEach(function(member) { %>
+                                    <div class="member">
+                                        <a href="/profile-<%= member.saltProfile %>.html">
+                                            <%= member.rank %> <%= member.username %>
+                                        </a>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="otc-container">
+            <div class="phase-zero-container">
+                <img src="/img/orbat/military_markings/otc.png" alt="Phase Zero" class="<%= candidateZero.length === 0 ? 'img-blank' : '' %>">
+                <div class="element-title <%= candidateZero.length === 0 ? 'title-blank' : '' %>">Operators Training<br>Course<br>Phase Zero</div>
+                <% if (candidateZero.length === 0) { %>
+                <% } else { %>
+                    <div class="phase-zero-members">
+                        <% candidateZero.forEach(function(candidate) { %>
+                            <div class="member">
+                                <a href="/profile-<%= candidate.userDetails.saltProfile %>.html">
+                                    <%= candidate.userDetails.rank %> <%= candidate.userDetails.username %>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+            <div class="phase-one-container">
+                <img src="/img/orbat/military_markings/otc.png" alt="Phase One" class="<%= candidateOne.length === 0 ? 'img-blank' : '' %>">
+                <div class="element-title <%= candidateOne.length === 0 ? 'title-blank' : '' %>">Operators Training<br>Course<br>Phase One</div>
+                <% if (candidateOne.length === 0) { %>
+                <% } else { %>
+                    <div class="phase-one-members">
+                        <% candidateOne.forEach(function(candidate) { %>
+                            <div class="member">
+                                <a href="/profile-<%= candidate.userDetails.saltProfile %>.html">
+                                    <%= candidate.userDetails.rank %> <%= candidate.userDetails.username %>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+            <div class="phase-two-container">
+                <img src="/img/orbat/military_markings/otc.png" alt="Phase Two" class="<%= candidateTwo.length === 0 ? 'img-blank' : '' %>">
+                <div class="element-title <%= candidateTwo.length === 0 ? 'title-blank' : '' %>">Operators Training<br>Course<br>Phase Two</div>
+                <% if (candidateTwo.length === 0) { %>
+                <% } else { %>
+                    <div class="phase-two-members">
+                        <% candidateTwo.forEach(function(candidate) { %>
+                            <div class="member">
+                                <a href="/profile-<%= candidate.userDetails.saltProfile %>.html">
+                                    <%= candidate.userDetails.rank %> <%= candidate.userDetails.username %>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</body>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            menu.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        function adjustMenuHeight() {
+            var menu = document.getElementById("navigation-menu");
+            var lastItem = menu.querySelector("ul li:last-child");
+            var menuBottomPadding = 20;
+            var lastItemBottom = lastItem.offsetTop + lastItem.offsetHeight + menuBottomPadding;
+            menu.style.height = lastItemBottom + "px";
+        }
+    </script>
+</html>

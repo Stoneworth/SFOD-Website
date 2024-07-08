@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-profiles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <title>D. Stoneworth's Profile</title>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="rank-box">
+            <div class="rank-info">
+                <a><img id="rank-image" src="" alt="Rank Image" class="rank-image"></a>
+                <p class="username">D. Stoneworth</p>
+                <p class="rank-assigned-date" id="rank-assigned-date">Time in Rank: </p>
+            </div>
+        </div>
+            <div class="info-box">
+                <div class="team-info">
+                    <p class="label">Team:</p>
+                    <p class="value">Dagger Troop HQ</p>
+                </div>
+                <div class="role-info">
+                    <p class="label">Role:</p>
+                    <p class="value">Troop CO</p>
+                </div>
+                <div class="mos-info">
+                    <p class="label">MOS:</p>
+                    <p class="value">18X</p>
+                </div>
+                <div class="callsign-info">
+                    <p class="label">Callsign:</p>
+                    <p class="value">D1A</p>
+                </div>
+                <div class="steamid-info">
+                    <p class="label">Steam ID:</p>
+                    <p class="value">N/A</p>
+                </div>
+                <div class="profile-creation">
+                    <p class="label">Profile Created At:</p>
+                    <p class="profile-created-date" id="profile-created-date">Time in Unit: </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rank = 'MSG';
+            const rankImage = document.getElementById('rank-image');
+            const rankAssignedDateElem = document.getElementById('rank-assigned-date');
+            const profileCreatedDateElem = document.getElementById('profile-created-date');
+            const rankAssignedDate = new Date('Sun Jun 16 2024 09:03:34 GMT+0100 (Irish Standard Time)');
+            const profileCreatedDate = new Date('Fri Jun 14 2024 09:02:32 GMT+0100 (Irish Standard Time)');
+            const today = new Date();
+            const diffTime = Math.abs(today - rankAssignedDate);
+            const diffTime2 = Math.abs(today - profileCreatedDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffDays2 = Math.ceil(diffTime2 / (1000 * 60 * 60 * 24)); 
+
+            rankAssignedDateElem.textContent = `Time in Rank: ${diffDays} Day(s)`;
+            profileCreatedDateElem.textContent = `Time in Unit: ${diffDays2} Day(s)`;
+
+            const rankMap = {
+                'SGT': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant.svg',
+                'CAN': 'https://3rdinf.us/uploads/rank_images/pvt.png.f60ee5b9c6108b5511edc5ec31ab8e11.png',
+                'SSG': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/staff_sergeant.svg',
+                'SFC': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_first_class.svg',
+                'MSG': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/master_sergeant.svg',
+                '1SG': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/first_sergeant.svg',
+                'SGM': 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_major.svg',
+                'WOC': 'https://cdn.shopify.com/s/files/1/0591/2395/7944/products/woc-letters-officer-army-branch-service-badge-in-black-metal-441649.png?v=1656057628',
+                'WO1': 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw1.svg',
+                'CW2': 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw2.svg',
+                'CW3': 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw3.svg',
+                'CW4': 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw4.svg',
+                'CW5': 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant_officer/sm/cw5.svg',
+                '2LT': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/second_lieutenant.svg',
+                '1LT': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/first_lieutenant.svg',
+                'CPT': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/captain.svg',
+                'MAJ': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/major.svg',
+                'LTC': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/lieutenant_colonel.svg',
+                'COL': 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/colonel.svg'
+            };
+
+            if (rankMap[rank]) {
+                rankImage.src = rankMap[rank];
+                rankImage.alt = rank;
+                rankImage.title = rankMap[rank].title;
+                rankImage.width = 45;
+                rankImage.height = 45;
+                if (rank === 'WOC') {
+                    rankImage.width = 65;
+                    rankImage.height = 65;
+                }
+            } else {
+                rankImage.alt = 'No rank image available';
+            }
+        });
+    </script>
+</body>
+</html>

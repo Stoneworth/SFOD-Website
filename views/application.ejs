@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-application.css">
+    <title>SFOD-D Squadron ArmA 3 MilSim</title>
+</head>
+<body>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                <% if (user) { %>
+                    <div class="dropdown">
+                       <li><button class="dropbtn2"><%= user.username %></button></li> 
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <li><a href="/login" class="login-small">Log-In</a></li>
+                <% } %>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/orbat-nato">ORBAT</a></li>
+                <li><a href="/recruitment">Squadrons</a></li>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="nav-links">
+                <% if (user) { %>
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn"><%= user.username %></button>
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="nav-button">Log-In</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="application-info">
+        <div class="application-inner">
+            <h2 class="app-header">CAG Application Form</h2>
+        </div>
+    </div>
+
+    <div class="application-form">
+        <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfi0cX8cP4VQhaefrbs0PL_5JDrfpEyD0dwAXQQEAz-NQvRnA/viewform?embedded=true"
+            width="640" height="2215" frameborder="5" marginheight="0" marginwidth="0">Loading…
+        </iframe>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            menu.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        function adjustMenuHeight() {
+            var menu = document.getElementById("navigation-menu");
+            var lastItem = menu.querySelector("ul li:last-child");
+            var menuBottomPadding = 20;
+            var lastItemBottom = lastItem.offsetTop + lastItem.offsetHeight + menuBottomPadding;
+            menu.style.height = lastItemBottom + "px";
+        }
+    </script>
+
+</body>
+</html>

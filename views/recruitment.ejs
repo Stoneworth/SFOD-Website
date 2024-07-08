@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Page</title>
+    <link rel="stylesheet" href="/style-recruitment.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                <% if (user) { %>
+                    <div class="dropdown">
+                       <li><button class="dropbtn2"><%= user.username %></button></li> 
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <li><a href="/login" class="login-small">Log-In</a></li>
+                <% } %>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/orbat-nato">ORBAT</a></li>
+                <li><a href="/recruitment">Squadrons</a></li>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="nav-links">
+                <% if (user) { %>
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn"><%= user.username %></button>
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= user.saltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="nav-button">Log-In</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-container image1">
+            <img src="/img/recruitment-fcd.jpg" class="animated-image" alt="Image 1">
+            <div class="fcd-info">
+                <div class="grey-box-header"><h2>Aviation Technology Office</h2></div>
+                <div class="grey-box"><p>E-Squadron of the 1st SFOD-D is the main aviation wing for D-Squadron. Capable to operate in an array of rotary aircraft - their capability is unmatched.
+                    Only the most skilled and capable pilots are able to join this elite squadron of aviators.
+                </p></div>
+                <div class="grey-box"><p>E-Squadron provide transport and strike capabilities. Main transport helicopters utilised are: MH-6M, MH-60, MH-47G. With strike helicopters including: AH-6M (And its variants), MH-60 DAP.
+                </p></div>
+            </div>
+        </div>
+        <div class="image-container image2">
+            <img src="/img/cag-halo.png" class="animated-image" alt="Image 2">
+            <div class="cag-info">
+                <div class="grey-box-header"><h2>D-Squadron</h2></div>
+                <div class="grey-box"><p>D-Squadron is the assault element of the 1st SFOD-D. Composed of 3 Troops (2 Assault + 1 Recce) they are the 
+                    tip of the spear that is the SOF. Only the most capable soldiers from the Special Forces or Rangers are selected to try out 
+                    for this secretive, and lethal group.
+                </p></div>
+                <div class="grey-box"><p>Utilising the most advanced and proven equipment, these soldiers can do any sort of mission imaginable. Be that direct action raids, 
+                    clandestine operations or even reconaissance. They can do it all.
+                </p></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const image1Container = document.querySelector('.image1');
+        const image2Container = document.querySelector('.image2');
+        const image1 = image1Container.querySelector('.animated-image');
+        const image2 = image2Container.querySelector('.animated-image');
+        
+        // Adjust container width after a slight delay to trigger the transition
+        setTimeout(() => {
+            image1Container.style.width = 'calc(50% - 5px)';
+            image2Container.style.width = 'calc(50% - 5px)';
+        }, 100);
+        
+        // Trigger image animations
+        setTimeout(() => {
+            image1.style.opacity = '1';
+            image1.style.transform = 'translateY(0)'; /* Move image to its normal position */
+
+            image2.style.opacity = '1';
+            image2.style.transform = 'translateY(0)'; /* Move image to its normal position */
+        }, 150);
+    });
+
+    function toggleMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            menu.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        function adjustMenuHeight() {
+            var menu = document.getElementById("navigation-menu");
+            var lastItem = menu.querySelector("ul li:last-child");
+            var menuBottomPadding = 20;
+            var lastItemBottom = lastItem.offsetTop + lastItem.offsetHeight + menuBottomPadding;
+            menu.style.height = lastItemBottom + "px";
+        }
+
+    </script>
+</body>
+</html>

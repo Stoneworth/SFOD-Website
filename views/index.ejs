@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msvalidate.01" content="99B08743DE0BEE2E2DF1A6FA88B98591" />
+    <link rel="stylesheet" href="style-index.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <title>CAG Arma 3 Realism Unit</title>
+</head>
+<body>
+    <div class="first-main-page">
+        <div class="videoContainer">
+            <video class="backGroundVideo" autoplay muted loop>
+                <source src="img/background.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay"></div>
+        </div>
+
+        <div class="main-contentContainer">
+            <h1 class="unit-title">Combat Applications Group<br>Arma 3 Realism Unit</h1>
+
+            <div class="main-logoContainer">
+                <img src="img/wolf-logo-circle.png" class="wolf-logo-circle" alt="Arma 3 Unit Logo for 1st SFOD-D">
+                <div class="button-container">
+                    <a href="https://discord.gg/qvfX3b3Xc7" class="button">Join Discord</a>
+                    <% if (user && user._id) { %>
+                        <a href="/application" class="button-apply">Apply Now</a>
+                    <% } else { %>
+                        <a href="/login" class="button-apply" onclick="alert('You Must Log In To Apply');">Apply Now</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                <% if (user) { %>
+                    <div class="dropdown">
+                       <li><button class="dropbtn2"><%= loggedinUsername %></button></li> 
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= loggedinsaltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <li><a href="/login" class="login-small">Log-In</a></li>
+                <% } %>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/orbat-nato">ORBAT</a></li>
+                <li><a href="/recruitment">Squadrons</a></li>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="nav-links">
+                <% if (user) { %>
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn"><%= loggedinUsername %></button>
+                        <div class="dropdown-content">
+                            <a href="/profile-<%= loggedinsaltProfile %>.html">My Profile</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="nav-button">Log-In</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="second-imageContainer">
+        <img src="img/cag-pistol.png" class="cag-pistol-image" alt="Overlay Image">
+        <div class="grey-box"><h2>Who We Are</h2></div>
+        <div class="grey-box"><p>Established in Q4 2021, D-SQUADRON is based on the famous Tier one special mission unit ‘1st Special Forces Operational Detachment – Delta’, commonly referred to as Delta Force, Combat Applications Group, “The Unit”, or within JSOC as Task Force Green.</p></div>
+        <div class="grey-box"><p>It was founded with the goal to provide a realistic, engaging and ‘fun through seriousness’ approach to the way we play ARMA and build and maintain a high standard in terms of team chemistry, mission scope and experience in game.</p></div>
+    </div>
+
+    <div class="third-imageContainer">
+        <img src="img/night-stroll.png" class="cag-team-image" alt="Overlay Image">
+        <div class="grey-box"><h2>What We Want From You</h2></div>
+        <div class="grey-box2"><p>We’re looking for committed players to join a tight-knit group of likeminded individuals that are willing to contribute in any way, shape or form. Whether that contribution is through our J-shops (recruiting new members, creating promotional materials or help build a new mod to offer a new way of playing) or by simply giving honest feedback during trainings and after each mission.</p></div>
+        <div class="grey-box2"><p>Our unit consists of both civilians and active servicemembers from different parts of the world thanks to our server being hosted within the UK. This allows a very broad range of players to connect and play with acceptable ping.</p></div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                menu.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("navigation-menu");
+            var overlay = document.getElementById("overlay");
+            menu.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        function adjustMenuHeight() {
+            var menu = document.getElementById("navigation-menu");
+            var lastItem = menu.querySelector("ul li:last-child");
+            var menuBottomPadding = 20;
+            var lastItemBottom = lastItem.offsetTop + lastItem.offsetHeight + menuBottomPadding;
+            menu.style.height = lastItemBottom + "px";
+        }
+    </script>
+</body>
+</html>

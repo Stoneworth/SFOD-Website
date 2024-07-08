@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+   <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="stylesheet" href="style-login.css">
+    <title>Login - 1st SFOD-D ArmA 3 MilSim Unit</title>
+</head>
+<body>
+
+    <div class="first-main-page">
+        <div class="videoContainer">
+            <video class="backGroundVideo" autoplay muted loop>
+                <source src="img/background.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay"></div>
+        </div>
+
+    <div class="navbar">
+        <a href="/" class="logo">1st SFOD-D</a>
+    </div>
+
+    <div class="form-container">
+        <form id="login-form" class="form">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="create-account">
+                <p>Don't have an account? <a href="/signup">Create one</a></p>
+            </div>
+            <div class="forgot-password">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const errorMessageElement = document.getElementById('error-message');
+
+    if (errorMessageElement) {
+        errorMessageElement.textContent = '';  // Clear any previous error message
+    }
+
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            const data = await response.json();
+
+            if (response.ok) {
+                const successMessage = 'Login successful';
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = successMessage;
+                } else {
+                    alert(successMessage);
+                }
+            } else {
+                const errorMsg = data.message || 'Unexpected error occurred.';
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = errorMsg;
+                } else {
+                    alert(errorMsg);
+                }
+                console.error('Error during login:', errorMsg);
+            }
+        }
+    } catch (error) {
+        const generalErrorMessage = 'An error occurred. Please try again later.';
+        if (errorMessageElement) {
+            errorMessageElement.textContent = generalErrorMessage;
+        } else {
+            alert(generalErrorMessage);
+        }
+        console.error('Error during login:', error);
+    }
+});
+
+    </script>
+
+</body>
+</html>

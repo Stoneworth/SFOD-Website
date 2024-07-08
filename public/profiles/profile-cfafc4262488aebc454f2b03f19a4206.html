@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-profiles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <title>D. Stoneworth's Profile</title>
+</head>
+
+<body>
+    <div class="content">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <div id="navigation-menu" class="navigation-menu">
+            <ul>
+                
+                    <div class="dropdown">
+                        <li><button class="dropbtn2">D. Stoneworth</button></li>
+                        <div class="dropdown-content">
+                            <a href="/profile-cfafc4262488aebc454f2b03f19a4206.html">My Profile</a>
+                            
+                                <a href="/dashboard">Dashboard</a>
+                            
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                
+                <li><a href="#">ORBAT</a></li>
+                <li><a href="#">Recruitment</a></li>
+                <li><a href="#">Dagger Troop</a></li>
+                <li><a href="#">Flights Concepts Division</a></li>
+                <li><a href="#">Intelligence</a></li>
+            </ul>
+        </div>
+        <div class="navbar">
+            <div class="nav-links">
+                
+                    <div class="dropdown">
+                        <button class="nav-button dropbtn">D. Stoneworth</button>
+                        <div class="dropdown-content">
+                            <a href="/profile-cfafc4262488aebc454f2b03f19a4206.html">My Profile</a>
+                            
+                                <a href="/dashboard">Dashboard</a>
+                            
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="info-dress-container">
+            <div class="profile-container">
+                <div class="rank-box">
+                    <div class="rank-info">
+                        <a><img id="rank-image" src="" alt="Rank Image" class="rank-image"></a>
+                        <p class="rank-text">CAN</p> <!-- New paragraph for rank -->
+                        <p class="username">D. Stoneworth</p>
+                        <p class="rank-assigned-date" id="rank-assigned-date">Time in Rank: </p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab('overview')">Overview</button>
+                        <button class="tab-button" onclick="openTab('assignments')">Assignments</button>
+                        <button class="tab-button" onclick="openTab('service-record')">Service Record</button>
+                    </div>
+                    <div class="tab-content active" id="overview">
+                        <div class="grid-container">
+                            <div class="team-info">
+                                <p class="label">Team:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">Assault Operations Division</p>
+                            </div>
+                            <div class="role-info">
+                                <p class="label">Role:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">Troop SGM</p>
+                            </div>
+                            <div class="mos-info">
+                                <p class="label">MOS:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">153E</p>
+                            </div>
+                            <div class="callsign-info">
+                                <p class="label">Callsign:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">D3C</p>
+                            </div>
+                            <div class="steamid-info">
+                                <p class="label">Steam ID:</p>
+                                <hr class="horizontal-line">
+                                <p class="value">76561197990218290</p>
+                            </div>
+                            <div class="profile-creation">
+                                <p class="label">Time In Unit:</p>
+                                <hr class="horizontal-line">
+                                <p class="profile-created-date" id="profile-created-date">Time in Unit: </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="assignments" class="tab-content" style="display:none;">
+                        
+                        <p>No assignment changes logged.</p>
+                        
+                    
+                        <div class="pagination">
+                            
+                            
+                        </div>
+                    </div>
+                    <div id="service-record" class="tab-content" style="display:none;">
+                        <!-- Service Record content here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dress-image-container">
+                <img src="img/profile-dress/dress-cfafc4262488aebc454f2b03f19a4206.png" alt="Dress Image" class="dress-image">
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="background-container">
+        <img src="img/profile-wolf.png" class="profile-wolf-image" alt="Background Image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rank = 'CAN';
+            const rankImage = document.getElementById('rank-image');
+            const rankAssignedDateElem = document.getElementById('rank-assigned-date');
+            const profileCreatedDateElem = document.getElementById('profile-created-date');
+            const rankAssignedDate = new Date('Tue Jun 25 2024 22:41:06 GMT+0100 (Irish Standard Time)');
+            const profileCreatedDate = new Date('Sun Jun 16 2024 09:22:38 GMT+0100 (Irish Standard Time)');
+            const today = new Date();
+            const diffTime = Math.abs(today - rankAssignedDate);
+            const diffTime2 = Math.abs(today - profileCreatedDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffDays2 = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            rankAssignedDateElem.textContent = `Time in Rank: ${diffDays} Day(s)`;
+            profileCreatedDateElem.textContent = `${diffDays2} Day(s)`;
+
+            const rankMap = {
+                'SGT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant.svg', title: 'Sergeant' },
+                'CAN': { src: 'https://3rdinf.us/uploads/rank_images/pvt.png.f60ee5b9c6108b5511edc5ec31ab8e11.png', title: 'Candidate' },
+                'SSG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/staff_sergeant.svg', title: 'Staff Sergeant' },
+                'SFC': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_first_class.svg', title: 'Sergeant First Class' },
+                'MSG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/master_sergeant.svg', title: 'Master Sergeant' },
+                '1SG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/first_sergeant.svg', title: 'First Sergeant' },
+                'SGM': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/enlisted/sm/sergeant_major.svg', title: 'Sergeant Major' },
+                'WOC': { src: 'https://cdn.shopify.com/s/files/1/0591/2395/7944/products/woc-letters-officer-army-branch-service-badge-in-black-metal-441649.png?v=1656057628', title: 'Warrant Officer Candidate' },
+                'WO1': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant/sm/warrant_officer_1.svg', title: 'Warrant Officer 1' },
+                'CW2': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant/sm/chief_warrant_officer_2.svg', title: 'Chief Warrant Officer 2' },
+                'CW3': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant/sm/chief_warrant_officer_3.svg', title: 'Chief Warrant Officer 3' },
+                'CW4': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant/sm/chief_warrant_officer_4.svg', title: 'Chief Warrant Officer 4' },
+                'CW5': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/warrant/sm/chief_warrant_officer_5.svg', title: 'Chief Warrant Officer 5' },
+                '2LT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/second_lieutenant.svg', title: 'Second Lieutenant' },
+                '1LT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/first_lieutenant.svg', title: 'First Lieutenant' },
+                'CPT': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/captain.svg', title: 'Captain' },
+                'MAJ': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/major.svg', title: 'Major' },
+                'LTC': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/lieutenant_colonel.svg', title: 'Lieutenant Colonel' },
+                'COL': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/officer/sm/colonel.svg', title: 'Colonel' },
+                'BG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/general/sm/brigadier_general.svg', title: 'Brigadier General' },
+                'MG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/general/sm/major_general.svg', title: 'Major General' },
+                'LTG': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/general/sm/lieutenant_general.svg', title: 'Lieutenant General' },
+                'GEN': { src: 'https://www.army.mil/e2/images/rv7/ranks/badges/general/sm/general.svg', title: 'General' }
+            };
+
+            if (rankMap[rank]) {
+                rankImage.src = rankMap[rank].src;
+                rankImage.alt = rankMap[rank].title;
+            } else {
+                rankImage.src = '';
+                rankImage.alt = 'Unknown Rank';
+            }
+        });
+
+        function toggleMenu() {
+            var menu = document.getElementById('navigation-menu');
+            var overlay = document.getElementById('overlay');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById('navigation-menu').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function openTab(tabName) {
+            var i;
+            var tabcontent = document.getElementsByClassName('tab-content');
+            var tablinks = document.getElementsByClassName('tab-button');
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = 'none';
+            }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(' active', '');
+            }
+            document.getElementById(tabName).style.display = 'block';
+            event.currentTarget.className += ' active';
+        }
+    </script>
+</body>
+</html>
